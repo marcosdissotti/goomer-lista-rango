@@ -1,0 +1,19 @@
+/* Montserrat-Medium */
+
+@font-face {
+  font-family: 'Montserrat-Medium';
+  font-style: normal;
+  font-weight: 400;
+  src: url('static/fonts/Montserrat/Montserrat-Medium/');
+  src: local('Montserrat-Medium'), local('Montserrat-Medium'),
+    url('static/fonts/Montserrat/Montserrat-Medium/Montserrat-Medium.woff')
+      format('woff'),
+    url('static/fonts/Montserrat/Montserrat-Medium/Montserrat-Medium.ttf')
+      format('truetype'),
+    url('static/fonts/Montserrat/Montserrat-Medium/Montserrat-Medium.svg')
+      format('svg');
+}
+
+body {
+  font-family: 'Montserrat-Medium';
+}
