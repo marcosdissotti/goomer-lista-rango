@@ -1,9 +1,9 @@
 import React, { useState, FormEvent, useEffect } from 'react';
-import api from '../../services/api';
-
-import veganRestaurantImg from '../../assets/images/vegan-restaurant-logo-design_1438-10.png';
 
 import { Search } from '../../components';
+import { RestaurantInterface } from '../../interfaces/restaurant.interfaces';
+import veganRestaurantImg from '../../assets/images/vegan-restaurant-logo-design_1438-10.png';
+import { fetchRestaurants } from '../../services/restaurants.services';
 
 import {
   Container,
@@ -18,31 +18,19 @@ import {
   Informations,
 } from './styles';
 
-interface Restaurant {
-  name: string;
-  address: string;
-  hours: {
-    from: string;
-    to: string;
-    days: Array<number>;
-  };
-  image: string;
-}
-
 const Main: React.FC = () => {
   const [inputError, setInputError] = useState('');
-  const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
+  const [restaurants, setRestaurants] = useState<RestaurantInterface[]>([]);
 
   useEffect(() => {
-    fetchRestaurants();
-
-    console.log(restaurants);
+    handleRestaurants();
   }, []);
 
-  async function fetchRestaurants() {
-    const response = await api.get<Restaurant[]>(`/restaurants`);
-    console.log(response.data);
-    setRestaurants(response.data);
+  // handle - interações do usuário / get
+
+  async function handleRestaurants() {
+    const data = await fetchRestaurants();
+    setRestaurants(data);
   }
 
   async function handleSearchRestaurant(
