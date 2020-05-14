@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { Search as SearchComponent } from '../../components';
 
@@ -97,7 +97,7 @@ export const StatusWrapper = styled.div`
   justify-content: flex-end;
 `;
 
-export const Status = styled.div`
+export const Status = styled.div<{ isOpen: boolean }>`
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -127,6 +127,25 @@ export const Status = styled.div`
     letter-spacing: 0px;
     font-family: Montserrat-Medium;
   }
+
+  ${(props) =>
+    !props.isOpen &&
+    css`
+      opacity: 1;
+      text-align: center;
+      background: #b5abd4;
+
+      div {
+        width: 100%;
+        height: 100%;
+      }
+
+      small {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+      }
+    `};
 `;
 
 export const Informations = styled.div`

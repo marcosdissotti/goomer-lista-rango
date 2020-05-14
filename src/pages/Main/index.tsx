@@ -20,6 +20,7 @@ import {
 
 const Main: React.FC = () => {
   const [inputError, setInputError] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
   const [restaurants, setRestaurants] = useState<RestaurantInterface[]>([]);
 
   useEffect(() => {
@@ -63,9 +64,9 @@ const Main: React.FC = () => {
               <img src={restaurant.image || veganRestaurantImg}></img>
               <Wrapper>
                 <StatusWrapper>
-                  <Status>
+                  <Status isOpen={isOpen}>
                     <div>
-                      <small>Aberto agora</small>
+                      <small>{isOpen ? 'Aberto agora' : 'Fechado'}</small>
                     </div>
                   </Status>
                 </StatusWrapper>
