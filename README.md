@@ -40,3 +40,5 @@
 Para rodar o projeto em ambiente de desenvolvimento, utilize o comando:
 
 `yarn dev`
+
+---
