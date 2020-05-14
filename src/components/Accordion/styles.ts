@@ -36,15 +36,17 @@ export const Container = styled.div<{ active: boolean }>`
     props.active
       ? css`
           div.panel {
-            display: none;
+            width: 100%;
+            height: 100%;
+            padding: 0 18px;
+
+            overflow: hidden;
+            background-color: red;
           }
         `
       : css`
           div.panel {
-            padding: 0 18px;
-
-            overflow: hidden;
-            background-color: white;
+            display: none;
           }
         `}
 

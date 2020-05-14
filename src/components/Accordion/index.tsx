@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Children } from 'react';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 
 import ChevronDown from '../../assets/icons/chevron-down.svg';
@@ -10,7 +10,7 @@ interface AccordionInterface {
   active: boolean;
 }
 
-const Accordion: React.FC = () => {
+const Accordion: React.FC = ({ children }) => {
   const [active, setActive] = useState<boolean>(false);
 
   const handleClick = () => setActive(!active);
@@ -29,7 +29,7 @@ const Accordion: React.FC = () => {
           />
         </div>
       </button>
-      {active && <div className="panel" />}
+      {active && <div className="panel">{children}</div>}
     </Container>
   );
 };

@@ -27,9 +27,7 @@ const Restaurant: React.FC = () => {
         <main>
           <Search />
           <Accordion>
-            <Accordion>
-              <p>asdasdasdasdasdas</p>
-            </Accordion>
+            <p>adasdasdasda</p>
           </Accordion>
         </main>
         <aside>kjkl</aside>
