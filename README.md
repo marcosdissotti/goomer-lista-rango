@@ -11,19 +11,11 @@
 - [Getting Started](#runner-getting-started)
 - [FAQ](#postbox-faq)
 
-# 🍝 Tecnologias
-
-- 🧂 1.
-- 🍕 2.
-- 🍷 3.
-- 🍩 4.
-- 🍔 5.
-
 # 🍝 Estrutura
 
-- 🧂 1.
+- 🍉 1.
 - 🍕 2.
-- 🍷 3.
+- 🧂 3.
 - 🍩 4.
 - 🍔 5.
 
