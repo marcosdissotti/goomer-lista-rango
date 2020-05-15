@@ -1,36 +1,73 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useRouteMatch, useLocation } from 'react-router-dom';
 
-import { Search, Accordion } from '../../components';
-import veganRestaurantImg from '../../assets/images/vegan-restaurant-logo-design_1438-10.png';
+import { Accordion, ItemCard, RestaurantInformation } from '../../components';
 
-import { Container, Header } from './styles';
+import { fetchMenu } from '../../services/menu.services';
+
+import { MenuInterface } from '../../interfaces/menu.interfaces';
+
+import { Container, Header, Search } from './styles';
+
+interface RestaurantParams {
+  id: string;
+}
+
+interface RestaurantLocations {
+  name: string;
+}
 
 const Restaurant: React.FC = () => {
+  const { params } = useRouteMatch<RestaurantParams>();
+  const { state } = useLocation<RestaurantLocations>();
+  const [menu, setMenu] = useState<MenuInterface[]>([]);
+
+  console.log('state', state);
+
+  useEffect(() => {
+    handleMenu();
+  }, []);
+
+  async function handleMenu() {
+    const data = await fetchMenu(params.id);
+
+    setMenu(data);
+  }
+
   return (
     <Container>
-      <Header>
-        <img src={veganRestaurantImg} />
-        <div className="informations">
-          <h1>Nome do Restaurante</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
-          <div className="opening">
-            <small>Segunda à Sexta: 11:30 às 15:00</small>
-            <small>Sábados: 11:30 às 22:00</small>
-            <small>Domingos e Feriados: 11:30 às 15:00</small>
-          </div>
-        </div>
-      </Header>
+      <RestaurantInformation name={state.name} />
       <section>
-        <main>
-          <Search />
+        <div>
+          <div className="search-wraper">
+            <Search />
+          </div>
+
           <Accordion>
-            <p>adasdasdasda</p>
+            <div className="cards-container">
+              <div className="card">
+                <ItemCard name="Macarrão" price={0} image="" />
+              </div>
+              <div className="card">
+                <ItemCard name="Macarrão" price={0} image="" />
+              </div>
+              <div className="card">
+                <ItemCard name="Macarrão" price={0} image="" />
+              </div>
+            </div>
           </Accordion>
-        </main>
-        <aside>kjkl</aside>
+          <Accordion>
+            <div className="card">
+              <ItemCard name="Pizza" price={0} image="" />
+            </div>
+          </Accordion>
+          <Accordion>
+            <div className="card">
+              <ItemCard name="Lazanha" price={0} image="" />
+            </div>
+          </Accordion>
+        </div>
+        <aside></aside>
       </section>
     </Container>
   );

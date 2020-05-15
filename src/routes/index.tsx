@@ -10,7 +10,7 @@ import Restaurant from '../pages/Restaurant';
 const Routes: React.FC = () => (
   <Switch>
     <Route path="/" exact component={Main} />
-    <Route path="/restaurante" component={Restaurant} />
+    <Route path="/restaurante/:id" component={Restaurant} />
   </Switch>
 );
 

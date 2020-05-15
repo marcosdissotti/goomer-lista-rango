@@ -60,7 +60,13 @@ const Main: React.FC = () => {
       <RestaurantsWrapper>
         <section className="restaurants">
           {restaurants.map((restaurant) => (
-            <Restaurant key={restaurant.name} href="teste">
+            <Restaurant
+              key={restaurant.name}
+              to={{
+                pathname: `/restaurante/${restaurant.id}`,
+                state: restaurant,
+              }}
+            >
               <img src={restaurant.image || veganRestaurantImg}></img>
               <Wrapper>
                 <StatusWrapper>

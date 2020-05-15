@@ -4,7 +4,7 @@ import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import ChevronDown from '../../assets/icons/chevron-down.svg';
 import ChevronRight from '../../assets/icons/chevron-right.svg';
 
-import { Container, Icon } from './styles';
+import { Container, Icon, Painel, AccordionWrapper } from './styles';
 
 interface AccordionInterface {
   active: boolean;
@@ -16,8 +16,8 @@ const Accordion: React.FC = ({ children }) => {
   const handleClick = () => setActive(!active);
 
   return (
-    <Container active={active}>
-      <button className="accordion" onClick={handleClick}>
+    <Container>
+      <AccordionWrapper onClick={handleClick}>
         <h2>Almoços</h2>
         <div className="icon-wrapper">
           <Icon
@@ -28,8 +28,8 @@ const Accordion: React.FC = ({ children }) => {
             }
           />
         </div>
-      </button>
-      {active && <div className="panel">{children}</div>}
+      </AccordionWrapper>
+      <Painel active={active}>{children}</Painel>
     </Container>
   );
 };

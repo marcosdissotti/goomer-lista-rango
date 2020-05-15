@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
+import { Search as SearchComponent } from '../../components';
+
 export const Container = styled.div`
-  width: 100%;
+  margin: auto;
+  width: 70%;
+  min-width: 1100px;
   height: 100%;
   padding-left: 74px;
   padding-right: 74px;
@@ -10,68 +14,43 @@ export const Container = styled.div`
   section {
     display: flex;
 
-    main {
+    div {
       width: 100%;
       height: 100%;
-      background: red;
+    }
+
+    div.search-wraper {
+      margin-bottom: 24px;
+
+      display: flex;
     }
 
     aside {
-      width: 282px;
-      height: 100%;
-
-      margin-left: 134px;
-      background: grey;
-    }
-  }
-`;
-
-export const Header = styled.header`
-  display: flex;
-
-  div.informations {
-    margin-left: 22px;
-
-    display: flex;
-    flex-direction: column;
-
-    div.opening {
       display: flex;
-      flex-direction: column;
-    }
-
-    h1 {
-      margin-bottom: 4px;
+      width: 282px;
+      height: 70vh;
 
       opacity: 1;
-      color: #404040;
-      font-size: 24px;
-      letter-spacing: 0px;
-      font-family: Montserrat-Medium;
-    }
-
-    p {
-      max-width: 528px;
-      margin-bottom: 8px;
-
-      opacity: 1;
-      color: #404040;
-      font-size: 16px;
-      letter-spacing: 0px;
-      font-family: Montserrat-Medium;
-    }
-
-    small {
-      opacity: 1;
-      color: #404040;
-      font-size: 12px;
-      letter-spacing: 0px;
-      font-family: Montserrat-Medium;
+      border-radius: 2px;
+      margin-left: 134px;
+      background: #e6e6e6 0% 0% no-repeat padding-box;
     }
   }
 
-  img {
-    width: 145px;
-    height: 145px;
+  .cards-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 24px 30px;
+
+    justify-content: center;
+
+    align-items: center;
+  }
+
+  .card {
   }
 `;
+
+export const Header = styled.header``;
+
+export const Search = styled(SearchComponent)``;

@@ -2,53 +2,15 @@ import styled, { css } from 'styled-components';
 
 import { colors } from '../../styles';
 
-export const Container = styled.div<{ active: boolean }>`
+export const Container = styled.div`
   width: 100%;
-  height: 42px;
+  padding-bottom: 16px;
 
-  .accordion {
-    display: flex;
+  .icon-wrapper {
+    width: 50%;
 
-    width: 100%;
-    padding: 18px;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-
-    transition: 0.4s;
-
-    opacity: 1;
-    color: #444;
-    background: #ffffff 0% 0% no-repeat padding-box;
-
-    .icon-wrapper {
-      width: 50%;
-
-      text-align: right;
-    }
+    text-align: right;
   }
-
-  .accordion:hover {
-    background-color: #ccc;
-  }
-
-  ${(props) =>
-    props.active
-      ? css`
-          div.panel {
-            width: 100%;
-            height: 100%;
-            padding: 0 18px;
-
-            overflow: hidden;
-            background-color: red;
-          }
-        `
-      : css`
-          div.panel {
-            display: none;
-          }
-        `}
 
   h2 {
     width: 50%;
@@ -62,10 +24,39 @@ export const Container = styled.div<{ active: boolean }>`
   }
 `;
 
+export const AccordionWrapper = styled.button`
+  width: 100%;
+  height: 42px;
+
+  display: flex;
+
+  padding: 18px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+
+  transition: 0.4s;
+
+  opacity: 1;
+  color: #444;
+  background: #ffffff 0% 0% no-repeat padding-box;
+`;
+
 export const Icon = styled.img`
   width: 16px;
   height: 16px;
   margin-bottom: -2px;
 
   opacity: 1;
+`;
+
+export const Painel = styled.div<{ active: boolean }>`
+  ${(props) =>
+    props.active
+      ? css`
+          margin: 24px 0;
+        `
+      : css`
+          display: none;
+        `}
 `;

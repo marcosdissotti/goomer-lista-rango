@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { Search as SearchComponent } from '../../components';
 
@@ -65,7 +66,7 @@ export const RestaurantsWrapper = styled.div`
   }
 `;
 
-export const Restaurant = styled.a`
+export const Restaurant = styled(Link)`
   width: 368px;
   height: 100px;
 
