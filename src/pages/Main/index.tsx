@@ -1,6 +1,5 @@
 import React, { useState, FormEvent, useEffect } from 'react';
 
-import { Search } from '../../components';
 import { RestaurantInterface } from '../../interfaces/restaurant.interfaces';
 import veganRestaurantImg from '../../assets/images/vegan-restaurant-logo-design_1438-10.png';
 import { fetchRestaurants } from '../../services/restaurants';
@@ -16,10 +15,13 @@ import {
   StatusWrapper,
   Status,
   Informations,
+  Search,
+  Icon,
 } from './styles';
 
 const Main: React.FC = () => {
   const [inputError, setInputError] = useState('');
+  const [search, setSearch] = useState<string>('');
   const [isOpen, setIsOpen] = useState(false);
   const [restaurants, setRestaurants] = useState<RestaurantInterface[]>([]);
 
@@ -34,17 +36,15 @@ const Main: React.FC = () => {
     setRestaurants(data);
   }
 
-  async function handleSearchRestaurant(
+  async function handleSearch(
     event: FormEvent<HTMLFormElement>,
   ): Promise<void> {
     event.preventDefault();
 
-    // const response = await api.get<Restaurant>(`restaurants`);
+    const response = await fetchRestaurants(search);
 
-    // const Restaurant = response.data;
-
-    // setRepositories([...repositories, Restaurant]);
-    // setNewRepo('');
+    setRestaurants(response);
+    setSearch('');
   }
 
   return (
@@ -54,7 +54,16 @@ const Main: React.FC = () => {
       </TitleWrapper>
 
       <SearchWrapper>
-        <Search />
+        <Search onSubmit={handleSearch}>
+          <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Buscar estabelecimento"
+          />
+          <button type="submit">
+            <Icon src={require('../../assets/icons/search.svg')} />
+          </button>
+        </Search>
       </SearchWrapper>
 
       <RestaurantsWrapper>

@@ -13,6 +13,8 @@ export const Container = styled.div`
 
   transition: 0.2s;
 
+  cursor: pointer;
+
   &:hover {
     transform: scale(1.08);
   }

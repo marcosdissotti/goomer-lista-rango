@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { Search as SearchComponent } from '../../components';
-
 export const Container = styled.div`
   margin: auto;
   width: 70%;
@@ -52,5 +50,3 @@ export const Container = styled.div`
 `;
 
 export const Header = styled.header``;
-
-export const Search = styled(SearchComponent)``;

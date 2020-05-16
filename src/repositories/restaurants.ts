@@ -3,11 +3,13 @@ import api from '../config/api';
 import { RestaurantInterface } from '../interfaces/restaurant.interfaces';
 
 export async function getRestaurants(
-  params: Object = {},
+  search?: string,
 ): Promise<RestaurantInterface[]> {
   try {
     const response = await api.get<RestaurantInterface[]>(`/restaurants`, {
-      params,
+      params: {
+        name_like: search,
+      },
     });
 
     return response.data;

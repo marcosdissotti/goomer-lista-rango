@@ -2,9 +2,11 @@ import { restaurantsRepository } from '../repositories';
 
 import { RestaurantInterface } from '../interfaces/restaurant.interfaces';
 
-export async function fetchRestaurants(): Promise<RestaurantInterface[]> {
+export async function fetchRestaurants(
+  search?: string,
+): Promise<RestaurantInterface[]> {
   try {
-    const restaurants = await restaurantsRepository.getRestaurants();
+    const restaurants = await restaurantsRepository.getRestaurants(search);
 
     return restaurants;
   } catch (error) {

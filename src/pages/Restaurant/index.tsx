@@ -7,7 +7,7 @@ import { fetchMenu } from '../../services/menu';
 
 import { GroupMenuInterface } from '../../interfaces/menu.interfaces';
 
-import { Container, Header, Search } from './styles';
+import { Container, Header } from './styles';
 
 interface RestaurantParams {
   id: string;
@@ -38,9 +38,7 @@ const Restaurant: React.FC = () => {
       <RestaurantInformation name={state.name} image={state.image} />
       <section>
         <div>
-          <div className="search-wraper">
-            <Search />
-          </div>
+          <div className="search-wraper">{/* <Search /> */}</div>
 
           {menu.map((group) => (
             <Accordion name={group.name}>
