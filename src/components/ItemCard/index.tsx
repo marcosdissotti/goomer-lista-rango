@@ -1,22 +1,24 @@
 import React from 'react';
 
-import veganRestaurantImg from '../../assets/images/vegan-restaurant-logo-design_1438-10.png';
+import veganRestaurantImg from '../../assets/images/default.jpg';
 
 import { Container, Informations } from './styles';
 
 interface ItemCard {
   name: string;
-  image: string;
+  image?: string;
+  description?: string;
   price: number;
 }
 
-const ItemCard: React.FC<ItemCard> = ({ name, price, image }) => {
+const ItemCard: React.FC<ItemCard> = ({ name, price, image, description }) => {
   return (
     <Container>
-      <img src={veganRestaurantImg} />
+      <img src={image || veganRestaurantImg} />
       <Informations>
-        <p>{name}</p>
-        <small>{price}</small>
+        {name && <p className="name">{name}</p>}
+        {description && <p>{description}</p>}
+        {price && <small>R$ {price.toFixed(2)}</small>}
       </Informations>
     </Container>
   );

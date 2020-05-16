@@ -1,20 +1,25 @@
+export interface GroupMenuInterface {
+  name: string;
+  items: MenuInterface[];
+}
+
 export interface MenuInterface {
   restaurantId: number;
   name: string;
   image: string;
   price: number;
   group: string;
-  sales: Array<Sales>;
+  sales: Sales[];
 }
 
 interface Hours {
   from: string;
   to: string;
-  days: Array<number>;
+  days: number[];
 }
 
 interface Sales {
   description: string;
   price: number;
-  hours: Array<Hours>;
+  hours: Hours[];
 }

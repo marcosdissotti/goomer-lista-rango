@@ -15,6 +15,24 @@ export const Container = styled.div`
       flex-direction: column;
     }
 
+    h1 {
+      margin-bottom: 4px;
+      opacity: 1;
+      color: #404040;
+      font-size: 24px;
+      letter-spacing: 0px;
+      font-family: Montserrat-Medium;
+    }
+    p {
+      max-width: 528px;
+      margin-bottom: 8px;
+      opacity: 1;
+      color: #404040;
+      font-size: 16px;
+      letter-spacing: 0px;
+      font-family: Montserrat-Medium;
+    }
+
     small {
       opacity: 1;
       color: #404040;

@@ -3,7 +3,7 @@ import React, { useState, FormEvent, useEffect } from 'react';
 import { Search } from '../../components';
 import { RestaurantInterface } from '../../interfaces/restaurant.interfaces';
 import veganRestaurantImg from '../../assets/images/vegan-restaurant-logo-design_1438-10.png';
-import { fetchRestaurants } from '../../services/restaurants.services';
+import { fetchRestaurants } from '../../services/restaurants';
 
 import {
   Container,

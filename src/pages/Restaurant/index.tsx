@@ -3,9 +3,9 @@ import { useRouteMatch, useLocation } from 'react-router-dom';
 
 import { Accordion, ItemCard, RestaurantInformation } from '../../components';
 
-import { fetchMenu } from '../../services/menu.services';
+import { fetchMenu } from '../../services/menu';
 
-import { MenuInterface } from '../../interfaces/menu.interfaces';
+import { GroupMenuInterface } from '../../interfaces/menu.interfaces';
 
 import { Container, Header, Search } from './styles';
 
@@ -15,14 +15,13 @@ interface RestaurantParams {
 
 interface RestaurantLocations {
   name: string;
+  image: string;
 }
 
 const Restaurant: React.FC = () => {
   const { params } = useRouteMatch<RestaurantParams>();
   const { state } = useLocation<RestaurantLocations>();
-  const [menu, setMenu] = useState<MenuInterface[]>([]);
-
-  console.log('state', state);
+  const [menu, setMenu] = useState<GroupMenuInterface[]>([]);
 
   useEffect(() => {
     handleMenu();
@@ -36,36 +35,28 @@ const Restaurant: React.FC = () => {
 
   return (
     <Container>
-      <RestaurantInformation name={state.name} />
+      <RestaurantInformation name={state.name} image={state.image} />
       <section>
         <div>
           <div className="search-wraper">
             <Search />
           </div>
 
-          <Accordion>
-            <div className="cards-container">
-              <div className="card">
-                <ItemCard name="Macarrão" price={0} image="" />
+          {menu.map((group) => (
+            <Accordion name={group.name}>
+              <div className="cards-container">
+                {group.items.map((item) => (
+                  <div className="card">
+                    <ItemCard
+                      name={item.name}
+                      price={item.price}
+                      image={item.image}
+                    />
+                  </div>
+                ))}
               </div>
-              <div className="card">
-                <ItemCard name="Macarrão" price={0} image="" />
-              </div>
-              <div className="card">
-                <ItemCard name="Macarrão" price={0} image="" />
-              </div>
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className="card">
-              <ItemCard name="Pizza" price={0} image="" />
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className="card">
-              <ItemCard name="Lazanha" price={0} image="" />
-            </div>
-          </Accordion>
+            </Accordion>
+          ))}
         </div>
         <aside></aside>
       </section>

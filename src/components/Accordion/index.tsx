@@ -7,10 +7,11 @@ import ChevronRight from '../../assets/icons/chevron-right.svg';
 import { Container, Icon, Painel, AccordionWrapper } from './styles';
 
 interface AccordionInterface {
-  active: boolean;
+  name: string;
+  children: any;
 }
 
-const Accordion: React.FC = ({ children }) => {
+const Accordion: React.FC<AccordionInterface> = ({ children, name }) => {
   const [active, setActive] = useState<boolean>(false);
 
   const handleClick = () => setActive(!active);
@@ -18,7 +19,7 @@ const Accordion: React.FC = ({ children }) => {
   return (
     <Container>
       <AccordionWrapper onClick={handleClick}>
-        <h2>Almoços</h2>
+        <h2>{name}</h2>
         <div className="icon-wrapper">
           <Icon
             src={

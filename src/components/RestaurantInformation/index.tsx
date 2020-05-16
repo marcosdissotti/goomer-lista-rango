@@ -14,7 +14,7 @@ const RestaurantInformation: React.FC<RestaurantInterface> = ({
 }) => {
   return (
     <Container>
-      <img src={veganRestaurantImg} />
+      <img src={!image ? veganRestaurantImg : image} />
       <div className="informations">
         <h1>{name}</h1>
         <p>
