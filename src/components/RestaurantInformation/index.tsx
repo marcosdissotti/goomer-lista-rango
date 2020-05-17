@@ -24,6 +24,7 @@ const RestaurantInformation: React.FC<RestaurantInterface> = ({
       <div className="informations">
         <h1>{name}</h1>
         <p>{address}</p>
+
         <div className="opening">
           <small>Segunda à Sexta: 11:30 às 15:00</small>
           <small>Sábados: 11:30 às 22:00</small>

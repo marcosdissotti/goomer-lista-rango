@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import media from 'styled-media-query';
 import { colors } from '../../styles';
 
 export const Container = styled.div`
@@ -12,7 +13,6 @@ export const Container = styled.div`
 
   section {
     display: flex;
-
     div {
       width: 100%;
       height: 100%;
@@ -86,11 +86,20 @@ export const Search = styled.form`
 
     opacity: 1;
     color: #404040;
-    font-size: 16px;
+
     text-align: left;
+
     letter-spacing: 0px;
     background: ${colors.white};
     font-family: Montserrat-Medium, sans-serif;
+
+    ${media.greaterThan('huge')`
+      font-size: 14px;
+    `}
+
+    ${media.lessThan('huge')`
+      font-size: 12px;
+    `}
   }
 
   input[type='text'],
@@ -129,4 +138,10 @@ export const Icon = styled.img`
   margin-bottom: -2px;
 
   opacity: 1;
+`;
+
+export const Card = styled.button`
+  width: 100%;
+  height: 100%;
+  border: 0px;
 `;

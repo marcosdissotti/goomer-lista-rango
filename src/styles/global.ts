@@ -7,12 +7,14 @@ export default createGlobalStyle`
     padding: 0;
     outline: 0;
     box-sizing: border-box;
+
   }
 
   body, #root {
     max-width: 100%;
     min-height: calc(100vh);
     -webkit-font-smoothing: antialiased;
+
   }
 
   body, input, button {

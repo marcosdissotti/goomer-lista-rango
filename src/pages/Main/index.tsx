@@ -1,5 +1,6 @@
 import React, { useState, FormEvent, useEffect } from 'react';
 import cron, { ScheduledTask } from 'node-cron';
+import ReactLoading from 'react-loading';
 
 import { RestaurantInterface } from '../../interfaces/restaurant.interfaces';
 import veganRestaurantImg from '../../assets/images/vegan-restaurant-logo-design_1438-10.png';
@@ -21,10 +22,12 @@ import {
   Search,
   Icon,
 } from './styles';
+import { colors } from '../../styles';
 
 const Main: React.FC = () => {
   const [schedules, setSchedules] = useState<ScheduledTask>();
   const [search, setSearch] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
   const [restaurants, setRestaurants] = useState<RestaurantInterface[]>([]);
 
   useEffect(() => {
@@ -54,6 +57,7 @@ const Main: React.FC = () => {
 
   async function handleRestaurants() {
     const data = await fetchRestaurants();
+
     setRestaurants(data);
   }
 
@@ -61,10 +65,12 @@ const Main: React.FC = () => {
     event: FormEvent<HTMLFormElement>,
   ): Promise<void> {
     event.preventDefault();
+    setLoading(true);
 
     const response = await fetchRestaurants(search);
 
     setRestaurants(response);
+    setLoading(false);
     setSearch('');
   }
 
@@ -82,7 +88,16 @@ const Main: React.FC = () => {
             placeholder="Buscar estabelecimento"
           />
           <button type="submit">
-            <Icon src={require('../../assets/icons/search.svg')} />
+            {!loading ? (
+              <Icon src={require('../../assets/icons/search.svg')} />
+            ) : (
+              <ReactLoading
+                type={'spinningBubbles'}
+                color={colors.darkGrey}
+                width={16}
+                height={16}
+              />
+            )}
           </button>
         </Search>
       </SearchWrapper>

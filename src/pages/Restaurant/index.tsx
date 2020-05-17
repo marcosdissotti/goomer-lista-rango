@@ -1,8 +1,14 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 import { useRouteMatch, useLocation } from 'react-router-dom';
+import ReactLoading from 'react-loading';
 
-import { Accordion, ItemCard, RestaurantInformation } from '../../components';
-
+import {
+  Accordion,
+  ItemCard,
+  RestaurantInformation,
+  Modal,
+} from '../../components';
+import { colors } from '../../styles';
 import { fetchMenu } from '../../services/menu';
 
 import { GroupMenuInterface } from '../../interfaces/menu.interfaces';
@@ -10,7 +16,7 @@ import { Hours } from '../../interfaces/restaurant.interfaces';
 
 import { checkIsOpenMenu } from '../../utils/menu';
 
-import { Container, Search, SearchWrapper, Icon } from './styles';
+import { Container, Search, SearchWrapper, Icon, Card } from './styles';
 
 interface RestaurantParams {
   id: string;
@@ -27,9 +33,11 @@ interface RestaurantLocations {
 const Restaurant: React.FC = () => {
   const { params } = useRouteMatch<RestaurantParams>();
   const [search, setSearch] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
   const [found, setFound] = useState<boolean>(false);
   const { state } = useLocation<RestaurantLocations>();
   const [menu, setMenu] = useState<GroupMenuInterface[]>([]);
+  const [modal, setModal] = useState<boolean>();
 
   useEffect(() => {
     handleMenu();
@@ -45,65 +53,80 @@ const Restaurant: React.FC = () => {
     event: FormEvent<HTMLFormElement>,
   ): Promise<void> {
     event.preventDefault();
+    setLoading(true);
     const response = await fetchMenu(state.id, search);
 
     if (response) {
       setMenu(response);
       setFound(true);
     }
-
+    setLoading(false);
     setSearch('');
   }
 
   return (
-    <Container>
-      <RestaurantInformation
-        name={state.name}
-        image={state.image}
-        address={state.address}
-        hours={state.hours}
-      />
-      <section>
-        <div>
-          <SearchWrapper>
-            <Search onSubmit={handleSearch}>
-              <div className="placeholder">Buscar no cardápio</div>
-              <input
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-              <button type="submit">
-                <Icon src={require('../../assets/icons/search.svg')} />
-              </button>
-            </Search>
-          </SearchWrapper>
+    <>
+      <Container>
+        <RestaurantInformation
+          name={state.name}
+          image={state.image}
+          address={state.address}
+          hours={state.hours}
+        />
+        <section>
+          <div>
+            <SearchWrapper>
+              <Search onSubmit={handleSearch}>
+                <div className="placeholder">Buscar no cardápio</div>
+                <input
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+                <button type="submit">
+                  {!loading ? (
+                    <Icon src={require('../../assets/icons/search.svg')} />
+                  ) : (
+                    <ReactLoading
+                      type={'spinningBubbles'}
+                      color={colors.darkGrey}
+                      width={16}
+                      height={16}
+                      delay={1000}
+                    />
+                  )}
+                </button>
+              </Search>
+            </SearchWrapper>
 
-          {menu &&
-            menu.map((group, groupIndex) => (
-              <Accordion
-                name={group.name}
-                found={found}
-                key={groupIndex}
-                first={groupIndex === 0 ? true : false}
-              >
-                <div className="cards-container">
-                  {group.items &&
-                    group.items.map((item, index) => (
-                      <div className="card" key={index}>
-                        <ItemCard
-                          name={item.name}
-                          price={item.price}
-                          image={item.image}
-                        />
-                      </div>
-                    ))}
-                </div>
-              </Accordion>
-            ))}
-        </div>
-        <aside></aside>
-      </section>
-    </Container>
+            {menu &&
+              menu.map((group, groupIndex) => (
+                <Accordion
+                  name={group.name}
+                  found={found}
+                  key={groupIndex}
+                  first={groupIndex === 0 ? true : false}
+                >
+                  <div className="cards-container">
+                    {group.items &&
+                      group.items.map((item, index) => (
+                        <Card key={index} onClick={() => setModal(true)}>
+                          {console.log('modal', modal)}
+                          <ItemCard
+                            name={item.name}
+                            price={item.price}
+                            image={item.image}
+                          />
+                        </Card>
+                      ))}
+                  </div>
+                </Accordion>
+              ))}
+          </div>
+          <aside></aside>
+        </section>
+        {modal && <Modal />}
+      </Container>
+    </>
   );
 };
 

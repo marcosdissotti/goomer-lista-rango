@@ -151,6 +151,10 @@ export const Informations = styled.div`
   flex-direction: column;
   justify-content: center;
 
+  &:hover {
+    text-decoration: underline;
+  }
+
   p {
     opacity: 1;
     color: ${colors.darkGrey};
@@ -194,6 +198,7 @@ export const Search = styled.form`
     font-size: 16px;
     color: ${colors.mirage};
     font-family: Montserrat-Medium, sans-serif;
+    background: ${colors.lightGrey};
 
     &::placeholder {
       font-family: Montserrat-Medium;

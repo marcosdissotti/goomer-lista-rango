@@ -33,20 +33,88 @@ export const Container = styled.div`
 
 export const Informations = styled.div`
   height: 100%;
-  margin-left: 25px;
+  margin-left: 8px;
+  margin-right: 16px;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
 
-  p {
-    margin-bottom: 8px;
+  div.info-wrapper {
+    margin-top: -8px;
 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  div.name-wrapper {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+  }
+
+  div.sales-wrapper {
+    width: 100%;
+    max-height: 21px;
+    margin-top: 8px;
+
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+  }
+
+  div.sales {
+    width: auto;
+    height: 18px;
+    padding-left: 4px;
+    padding-right: 4px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #2b0d61 0% 0% no-repeat padding-box;
+    border-radius: 11px;
+    opacity: 1;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 1;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0px;
+    font-family: Montserrat-Medium;
+    white-space: nowrap;
+
+    img.icon-award {
+      height: 12px;
+      margin-right: 4px;
+    }
+  }
+
+  p.description {
+    font-size: 12px;
+  }
+
+  p {
     opacity: 1;
     font-size: 16px;
     letter-spacing: 0px;
     color: ${colors.darkGrey};
     font-family: Montserrat-Medium;
+    text-align: left;
+    margin-bottom: 8px;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   small {
