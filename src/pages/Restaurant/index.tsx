@@ -11,7 +11,7 @@ import {
 import { colors } from '../../styles';
 import { fetchMenu } from '../../services/menu';
 
-import { GroupMenuInterface } from '../../interfaces/menu.interfaces';
+import { GroupMenuInterface, Sale } from '../../interfaces/menu.interfaces';
 import { Hours } from '../../interfaces/restaurant.interfaces';
 
 import { checkIsOpenMenu } from '../../utils/menu';
@@ -27,6 +27,7 @@ interface RestaurantLocations {
   name: string;
   image: string;
   address: string;
+  sales?: Sale;
   hours: Array<Hours>;
 }
 
@@ -115,6 +116,7 @@ const Restaurant: React.FC = () => {
                             name={item.name}
                             price={item.price}
                             image={item.image}
+                            sales={item.sales && item.sales}
                           />
                         </Card>
                       ))}

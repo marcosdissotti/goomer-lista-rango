@@ -9,14 +9,14 @@ export interface MenuInterface {
   image?: string;
   price?: number;
   group: string;
-  sales: Sales[];
-  isOpen: boolean;
+  sales?: Sale[];
 }
 
-interface Sales {
+export interface Sale {
   description: string;
   price: number;
   hours: Hours[];
+  isOpen: boolean;
 }
 
 interface Hours {

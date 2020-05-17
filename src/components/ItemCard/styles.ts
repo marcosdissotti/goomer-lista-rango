@@ -46,6 +46,12 @@ export const Informations = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    div.price-from-sales {
+      max-height: 18px;
+      display: flex;
+      align-items: center;
+    }
   }
 
   div.name-wrapper {
@@ -115,6 +121,17 @@ export const Informations = styled.div`
     &:hover {
       text-decoration: underline;
     }
+  }
+  small.line-through {
+    margin-left: 8px;
+
+    opacity: 1;
+    color: #989898;
+    font-size: 12px;
+    text-align: left;
+    letter-spacing: 0px;
+    text-decoration: line-through;
+    font-family: Montserrat-Medium;
   }
 
   small {

@@ -1,6 +1,7 @@
 import {
   GroupMenuInterface,
   MenuInterface,
+  Sale,
 } from '../interfaces/menu.interfaces';
 import { checkIsOpen } from './hours';
 
@@ -19,10 +20,19 @@ export const checkIsOpenMenu = (groups: GroupMenuInterface[]) => {
     return {
       ...group,
       items: group.items.map(
-        (item): MenuInterface => ({
-          ...item,
-          isOpen: checkIsOpen(item),
-        }),
+        (item): MenuInterface => {
+          return !item.sales
+            ? item
+            : {
+                ...item,
+                sales: item.sales.map(
+                  (sale: Sale): Sale => ({
+                    ...sale,
+                    isOpen: checkIsOpen(sale),
+                  }),
+                ),
+              };
+        },
       ),
     };
   });
