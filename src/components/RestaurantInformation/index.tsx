@@ -1,5 +1,5 @@
-import React from 'react';
-import { format, parseISO } from 'date-fns';
+import React, { useEffect, useState } from 'react';
+import { format, getISODay } from 'date-fns';
 
 import pt from 'date-fns/locale/pt';
 
@@ -15,6 +15,49 @@ const RestaurantInformation: React.FC<RestaurantInterface> = ({
   hours,
   image,
 }) => {
+  const [hoursDescriptions, setHoursDescriptions] = useState<string[]>([]);
+
+  useEffect(() => {
+    const strings = getHoursDescriptions();
+    if (strings) {
+      setHoursDescriptions(strings);
+    }
+  }, []);
+
+  const weekday = [
+    'Domingo',
+    'Segunda',
+    'Terça',
+    'Quarta',
+    'Quinta',
+    'Sexta',
+    'Sábado',
+  ];
+
+  function getHoursDescriptions(): any[] | undefined {
+    const hoursDescriptions = hours?.map((times) => {
+      const weekDays = times.days.map((day) => {
+        return weekday[day - 1];
+      });
+
+      const lastDay = weekDays.slice(-1)[0];
+      const fisrtDay = weekDays.slice(0)[0];
+      // .join(',')
+      return times ? (
+        <>
+          {`${fisrtDay} à ${lastDay} das`}
+          <b>{` ${times.from} às ${times.to}`}</b>
+        </>
+      ) : (
+        <></>
+      );
+    });
+
+    console.log(hoursDescriptions);
+
+    return hoursDescriptions;
+  }
+
   return (
     <Container>
       <img
@@ -26,9 +69,10 @@ const RestaurantInformation: React.FC<RestaurantInterface> = ({
         <p>{address}</p>
 
         <div className="opening">
-          <small>Segunda à Sexta: 11:30 às 15:00</small>
-          <small>Sábados: 11:30 às 22:00</small>
-          <small>Domingos e Feriados: 11:30 às 15:00</small>
+          {hoursDescriptions &&
+            hoursDescriptions.map((description, index) => (
+              <small key={index}>{description}</small>
+            ))}
         </div>
       </div>
     </Container>

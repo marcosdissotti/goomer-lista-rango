@@ -2,12 +2,12 @@ import { getISODay } from 'date-fns';
 
 import { Hours } from '../interfaces/restaurant.interfaces';
 
-export const checkIsOpen = (restaurant: any): boolean => {
-  if (!restaurant.hours) return false;
+export const checkIsOpen = (item: any): boolean => {
+  if (!item.hours) return false;
 
   const now = new Date();
 
-  const isSomeForTrue = restaurant.hours.map((hour: Hours) => {
+  const isSomeForTrue = item.hours.map((hour: Hours) => {
     const [fromH, fromM] = hour.from?.split(':') || [0, 0];
     const [toH, toM] = hour.to?.split(':') || [0, 0];
 
@@ -26,11 +26,11 @@ export const checkIsOpen = (restaurant: any): boolean => {
       to.setDate(to.getDate() + 1);
     }
 
-    if (hour.days.includes(getISODay(now) - 1)) {
-      if (to >= from) {
-        from.setDate(from.getDate() - 1);
-      }
-    }
+    // if (hour.days.includes(getISODay(now) - 1)) { // TRATAR QUANDO PASSA DA MEIA NOITE
+    //   if (to >= from) {
+    //     from.setDate(from.getDate() - 1);
+    //   }
+    // }
 
     if (now >= from && now <= to) {
       if (hour.days.includes(getISODay(now))) {

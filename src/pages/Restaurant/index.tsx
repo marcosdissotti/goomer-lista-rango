@@ -1,5 +1,6 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 import { useRouteMatch, useLocation } from 'react-router-dom';
+import cron, { ScheduledTask } from 'node-cron';
 import ReactLoading from 'react-loading';
 
 import {
@@ -39,10 +40,31 @@ const Restaurant: React.FC = () => {
   const { state } = useLocation<RestaurantLocations>();
   const [menu, setMenu] = useState<GroupMenuInterface[]>([]);
   const [modal, setModal] = useState<boolean>();
+  const [schedules, setSchedules] = useState<ScheduledTask>();
 
   useEffect(() => {
     handleMenu();
+    setSchedules(
+      cron.schedule('*/1 * * * *', () => checkIsOpenMenu(menu), {
+        scheduled: true,
+        timezone: 'America/Sao_Paulo',
+      }),
+    );
   }, []);
+
+  useEffect(() => {
+    if (!schedules) {
+      return;
+    }
+
+    schedules.destroy();
+    setSchedules(
+      cron.schedule('*/1 * * * *', () => checkIsOpenMenu(menu), {
+        scheduled: true,
+        timezone: 'America/Sao_Paulo',
+      }),
+    );
+  }, [menu]);
 
   async function handleMenu() {
     const data = await fetchMenu(params.id);
@@ -111,7 +133,6 @@ const Restaurant: React.FC = () => {
                     {group.items &&
                       group.items.map((item, index) => (
                         <Card key={index} onClick={() => setModal(true)}>
-                          {console.log('modal', modal)}
                           <ItemCard
                             name={item.name}
                             price={item.price}
