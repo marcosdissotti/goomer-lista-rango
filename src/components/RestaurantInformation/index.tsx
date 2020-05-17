@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { format, getISODay } from 'date-fns';
 
-import pt from 'date-fns/locale/pt';
+import weekday from '../../enums/weekdays';
 
 import { RestaurantInterface } from '../../interfaces/restaurant.interfaces';
 import veganRestaurantImg from '../../assets/images/vegan-restaurant-logo-design_1438-10.png';
@@ -23,16 +22,6 @@ const RestaurantInformation: React.FC<RestaurantInterface> = ({
       setHoursDescriptions(strings);
     }
   }, []);
-
-  const weekday = [
-    'Domingo',
-    'Segunda',
-    'Terça',
-    'Quarta',
-    'Quinta',
-    'Sexta',
-    'Sábado',
-  ];
 
   function getHoursDescriptions(): any[] | undefined {
     const hoursDescriptions = hours?.map((times) => {
