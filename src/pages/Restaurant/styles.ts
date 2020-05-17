@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors } from '../../styles';
 
 export const Container = styled.div`
   margin: auto;
@@ -50,3 +51,82 @@ export const Container = styled.div`
 `;
 
 export const Header = styled.header``;
+
+export const SearchWrapper = styled.div`
+  width: 50%;
+  margin-bottom: 26px;
+
+  display: flex;
+  justify-content: center;
+`;
+
+export const Search = styled.form`
+  width: 100%;
+  height: 40px;
+  border-radius: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  opacity: 1;
+  box-shadow: 0px 2px 4px #00000029;
+  background: #e6e6e6 0% 0% no-repeat padding-box;
+
+  .placeholder {
+    width: 30%;
+    height: 100%;
+    margin-right: 16px;
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 1;
+    color: #404040;
+    font-size: 16px;
+    text-align: left;
+    letter-spacing: 0px;
+    background: ${colors.white};
+    font-family: Montserrat-Medium, sans-serif;
+  }
+
+  input[type='text'],
+  textarea {
+    background: #e6e6e6 0% 0% no-repeat padding-box;
+  }
+
+  > input {
+    width: 80%;
+    border: none;
+
+    font-size: 16px;
+    background: #e6e6e6 0% 0% no-repeat padding-box;
+    font-family: Montserrat-Medium, sans-serif;
+
+    &::placeholder {
+      font-family: Montserrat-Medium;
+      font-weight: 400;
+      letter-spacing: 0;
+      color: ${colors.darkGrey};
+      opacity: 1;
+    }
+  }
+
+  > button {
+    border: none;
+    padding: 10px 18px 10px 38px;
+
+    background: transparent;
+  }
+`;
+
+export const Icon = styled.img`
+  width: 16px;
+  height: 16px;
+  margin-bottom: -2px;
+
+  opacity: 1;
+`;

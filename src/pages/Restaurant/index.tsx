@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FormEvent } from 'react';
 import { useRouteMatch, useLocation } from 'react-router-dom';
 
 import { Accordion, ItemCard, RestaurantInformation } from '../../components';
@@ -6,22 +6,28 @@ import { Accordion, ItemCard, RestaurantInformation } from '../../components';
 import { fetchMenu } from '../../services/menu';
 
 import { GroupMenuInterface } from '../../interfaces/menu.interfaces';
+import { Hours } from '../../interfaces/restaurant.interfaces';
 
 import { checkIsOpenMenu } from '../../utils/menu';
 
-import { Container, Header } from './styles';
+import { Container, Search, SearchWrapper, Icon } from './styles';
 
 interface RestaurantParams {
   id: string;
 }
 
 interface RestaurantLocations {
+  id: string;
   name: string;
   image: string;
+  address: string;
+  hours: Array<Hours>;
 }
 
 const Restaurant: React.FC = () => {
   const { params } = useRouteMatch<RestaurantParams>();
+  const [search, setSearch] = useState<string>('');
+  const [found, setFound] = useState<boolean>(false);
   const { state } = useLocation<RestaurantLocations>();
   const [menu, setMenu] = useState<GroupMenuInterface[]>([]);
 
@@ -35,18 +41,46 @@ const Restaurant: React.FC = () => {
     setMenu(updated);
   }
 
-  console.log('menu', menu);
+  async function handleSearch(
+    event: FormEvent<HTMLFormElement>,
+  ): Promise<void> {
+    event.preventDefault();
+    const response = await fetchMenu(state.id, search);
+
+    if (response) {
+      setMenu(response);
+      setFound(true);
+    }
+
+    setSearch('');
+  }
 
   return (
     <Container>
-      <RestaurantInformation name={state.name} image={state.image} />
+      <RestaurantInformation
+        name={state.name}
+        image={state.image}
+        address={state.address}
+        hours={state.hours}
+      />
       <section>
         <div>
-          <div className="search-wraper">{/* <Search /> */}</div>
+          <SearchWrapper>
+            <Search onSubmit={handleSearch}>
+              <div className="placeholder">Buscar no cardápio</div>
+              <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <button type="submit">
+                <Icon src={require('../../assets/icons/search.svg')} />
+              </button>
+            </Search>
+          </SearchWrapper>
 
           {menu &&
             menu.map((group, groupIndex) => (
-              <Accordion name={group.name} key={groupIndex}>
+              <Accordion name={group.name} found={found} key={groupIndex}>
                 <div className="cards-container">
                   {group.items &&
                     group.items.map((item, index) => (

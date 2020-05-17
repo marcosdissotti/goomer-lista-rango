@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Container, Icon, Painel, AccordionWrapper } from './styles';
 
 interface AccordionInterface {
   name: string;
+  found: boolean;
   children: any;
 }
 
-const Accordion: React.FC<AccordionInterface> = ({ children, name }) => {
+const Accordion: React.FC<AccordionInterface> = ({ children, name, found }) => {
   const [active, setActive] = useState<boolean>(false);
+
+  useEffect(() => {
+    found && setActive(true);
+  }, []);
 
   const handleClick = () => setActive(!active);
 

@@ -6,13 +6,18 @@ export const Container = styled.div`
 
   div.informations {
     margin-left: 22px;
+    padding: 4px 0 4px 0;
 
     display: flex;
     flex-direction: column;
 
     div.opening {
+      height: 100%;
+
       display: flex;
       flex-direction: column;
+
+      justify-content: flex-end;
     }
 
     h1 {

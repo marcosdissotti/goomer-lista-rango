@@ -6,9 +6,10 @@ import { GroupMenuInterface } from '../interfaces/menu.interfaces';
 
 export async function fetchMenu(
   restaurantId: string,
+  search?: string,
 ): Promise<GroupMenuInterface[]> {
   try {
-    const data = await menuRepository.getMenu(restaurantId);
+    const data = await menuRepository.getMenu(restaurantId, search);
 
     const menu = data.reduce(function (menu, item) {
       return {
