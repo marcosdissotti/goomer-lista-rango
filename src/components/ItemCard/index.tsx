@@ -8,7 +8,7 @@ interface ItemCard {
   name: string;
   image?: string;
   description?: string;
-  price: number;
+  price: number | undefined;
 }
 
 const ItemCard: React.FC<ItemCard> = ({ name, price, image, description }) => {

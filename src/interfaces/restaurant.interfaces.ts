@@ -1,11 +1,14 @@
 export interface RestaurantInterface {
   id?: number;
-  name?: string;
+  name: string;
   address?: string;
-  hours?: {
-    from: string;
-    to: string;
-    days: Array<number>;
-  };
+  hours?: Hours[];
   image?: string;
+  isOpen?: boolean | undefined;
+}
+
+export interface Hours {
+  from: string;
+  to: string;
+  days: Array<number>;
 }

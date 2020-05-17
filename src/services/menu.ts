@@ -2,6 +2,8 @@ import { menuRepository } from '../repositories';
 
 import { GroupMenuInterface } from '../interfaces/menu.interfaces';
 
+// import data from './data';
+
 export async function fetchMenu(
   restaurantId: string,
 ): Promise<GroupMenuInterface[]> {

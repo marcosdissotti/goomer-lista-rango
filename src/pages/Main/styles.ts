@@ -92,7 +92,7 @@ export const StatusWrapper = styled.div`
   justify-content: flex-end;
 `;
 
-export const Status = styled.div<{ isOpen: boolean }>`
+export const Status = styled.div<{ isOpen: boolean | undefined }>`
   width: 48px;
   height: 48px;
   border-radius: 50%;

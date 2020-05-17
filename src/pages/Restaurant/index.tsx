@@ -7,6 +7,8 @@ import { fetchMenu } from '../../services/menu';
 
 import { GroupMenuInterface } from '../../interfaces/menu.interfaces';
 
+import { checkIsOpenMenu } from '../../utils/menu';
+
 import { Container, Header } from './styles';
 
 interface RestaurantParams {
@@ -30,8 +32,12 @@ const Restaurant: React.FC = () => {
   async function handleMenu() {
     const data = await fetchMenu(params.id);
 
-    setMenu(data);
+    const updated = checkIsOpenMenu(data);
+    console.log('updated', updated);
+    setMenu(updated);
   }
+
+  console.log('menu', menu);
 
   return (
     <Container>
@@ -40,21 +46,23 @@ const Restaurant: React.FC = () => {
         <div>
           <div className="search-wraper">{/* <Search /> */}</div>
 
-          {menu.map((group) => (
-            <Accordion name={group.name}>
-              <div className="cards-container">
-                {group.items.map((item) => (
-                  <div className="card">
-                    <ItemCard
-                      name={item.name}
-                      price={item.price}
-                      image={item.image}
-                    />
-                  </div>
-                ))}
-              </div>
-            </Accordion>
-          ))}
+          {menu &&
+            menu.map((group, groupIndex) => (
+              <Accordion name={group.name} key={groupIndex}>
+                <div className="cards-container">
+                  {group &&
+                    group.items.map((item, index) => (
+                      <div className="card" key={index}>
+                        <ItemCard
+                          name={item.name}
+                          price={item.price}
+                          image={item.image}
+                        />
+                      </div>
+                    ))}
+                </div>
+              </Accordion>
+            ))}
         </div>
         <aside></aside>
       </section>

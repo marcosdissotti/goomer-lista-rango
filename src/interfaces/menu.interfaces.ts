@@ -6,10 +6,11 @@ export interface GroupMenuInterface {
 export interface MenuInterface {
   restaurantId: number;
   name: string;
-  image: string;
-  price: number;
+  image?: string;
+  price?: number;
   group: string;
-  sales: Sales[];
+  sales?: Sales[];
+  isOpen: boolean;
 }
 
 interface Hours {

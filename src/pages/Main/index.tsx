@@ -1,8 +1,11 @@
 import React, { useState, FormEvent, useEffect } from 'react';
+import cron, { ScheduledTask } from 'node-cron';
 
 import { RestaurantInterface } from '../../interfaces/restaurant.interfaces';
 import veganRestaurantImg from '../../assets/images/vegan-restaurant-logo-design_1438-10.png';
 import { fetchRestaurants } from '../../services/restaurants';
+
+import { checkIsOpenRestaurant } from '../../utils/restaurants';
 
 import {
   Container,
@@ -21,15 +24,34 @@ import {
 
 const Main: React.FC = () => {
   const [inputError, setInputError] = useState('');
+  const [schedules, setSchedules] = useState<ScheduledTask>();
   const [search, setSearch] = useState<string>('');
-  const [isOpen, setIsOpen] = useState(false);
   const [restaurants, setRestaurants] = useState<RestaurantInterface[]>([]);
 
   useEffect(() => {
     handleRestaurants();
+
+    setSchedules(
+      cron.schedule('*/1 * * * *', () => checkIsOpenRestaurant(restaurants), {
+        scheduled: true,
+        timezone: 'America/Sao_Paulo',
+      }),
+    );
   }, []);
 
-  // handle - interações do usuário / get
+  useEffect(() => {
+    if (!schedules) {
+      return;
+    }
+
+    schedules.destroy();
+    setSchedules(
+      cron.schedule('*/1 * * * *', () => checkIsOpenRestaurant(restaurants), {
+        scheduled: true,
+        timezone: 'America/Sao_Paulo',
+      }),
+    );
+  }, [restaurants]);
 
   async function handleRestaurants() {
     const data = await fetchRestaurants();
@@ -79,9 +101,11 @@ const Main: React.FC = () => {
               <img src={restaurant.image || veganRestaurantImg}></img>
               <Wrapper>
                 <StatusWrapper>
-                  <Status isOpen={isOpen}>
+                  <Status isOpen={restaurant.isOpen}>
                     <div>
-                      <small>{isOpen ? 'Aberto agora' : 'Fechado'}</small>
+                      <small>
+                        {restaurant.isOpen ? 'Aberto agora' : 'Fechado'}
+                      </small>
                     </div>
                   </Status>
                 </StatusWrapper>
