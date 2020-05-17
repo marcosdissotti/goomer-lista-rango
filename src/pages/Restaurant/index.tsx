@@ -80,7 +80,12 @@ const Restaurant: React.FC = () => {
 
           {menu &&
             menu.map((group, groupIndex) => (
-              <Accordion name={group.name} found={found} key={groupIndex}>
+              <Accordion
+                name={group.name}
+                found={found}
+                key={groupIndex}
+                first={groupIndex === 0 ? true : false}
+              >
                 <div className="cards-container">
                   {group.items &&
                     group.items.map((item, index) => (
