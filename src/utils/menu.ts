@@ -14,13 +14,16 @@ import { checkIsOpen } from './hours';
 //   });
 // };
 
-export const checkIsOpenMenu = (groups: GroupMenuInterface[]): any => {
+export const checkIsOpenMenu = (groups: GroupMenuInterface[]) => {
   return groups.map((group): any => {
-    return group.items.map(
-      (item): MenuInterface => ({
-        ...item,
-        isOpen: checkIsOpen(item),
-      }),
-    );
+    return {
+      ...group,
+      items: group.items.map(
+        (item): MenuInterface => ({
+          ...item,
+          isOpen: checkIsOpen(item),
+        }),
+      ),
+    };
   });
 };

@@ -10,8 +10,6 @@ export async function fetchRestaurants(
     const restaurants = await restaurantsRepository.getRestaurants(search);
     // const restaurants = data;
 
-    console.log(restaurants);
-
     return checkIsOpenRestaurant(restaurants);
   } catch (error) {
     console.error(error);

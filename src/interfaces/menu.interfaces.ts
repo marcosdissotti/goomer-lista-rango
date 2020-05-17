@@ -9,18 +9,18 @@ export interface MenuInterface {
   image?: string;
   price?: number;
   group: string;
-  sales?: Sales[];
+  sales: Sales[];
   isOpen: boolean;
-}
-
-interface Hours {
-  from: string;
-  to: string;
-  days: number[];
 }
 
 interface Sales {
   description: string;
   price: number;
   hours: Hours[];
+}
+
+interface Hours {
+  from: string;
+  to: string;
+  days: number[];
 }

@@ -1,11 +1,6 @@
 import { getISODay } from 'date-fns';
 
-import {
-  RestaurantInterface,
-  Hours,
-} from '../interfaces/restaurant.interfaces';
-
-import { MenuInterface } from '../interfaces/menu.interfaces';
+import { Hours } from '../interfaces/restaurant.interfaces';
 
 export const checkIsOpen = (restaurant: any): boolean => {
   if (!restaurant.hours) return false;

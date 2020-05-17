@@ -1,11 +1,8 @@
 import React from 'react';
-import { Switch, Route, RouteProps } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import Main from '../pages/Main';
 import Restaurant from '../pages/Restaurant';
-
-//Switch - uma rota apenas seja exibida.
-// exact - para incluir no path exatamente a /
 
 const Routes: React.FC = () => (
   <Switch>

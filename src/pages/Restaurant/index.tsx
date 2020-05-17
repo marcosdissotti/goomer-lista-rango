@@ -31,9 +31,7 @@ const Restaurant: React.FC = () => {
 
   async function handleMenu() {
     const data = await fetchMenu(params.id);
-
     const updated = checkIsOpenMenu(data);
-    console.log('updated', updated);
     setMenu(updated);
   }
 
@@ -50,7 +48,7 @@ const Restaurant: React.FC = () => {
             menu.map((group, groupIndex) => (
               <Accordion name={group.name} key={groupIndex}>
                 <div className="cards-container">
-                  {group &&
+                  {group.items &&
                     group.items.map((item, index) => (
                       <div className="card" key={index}>
                         <ItemCard

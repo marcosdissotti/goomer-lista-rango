@@ -23,7 +23,6 @@ import {
 } from './styles';
 
 const Main: React.FC = () => {
-  const [inputError, setInputError] = useState('');
   const [schedules, setSchedules] = useState<ScheduledTask>();
   const [search, setSearch] = useState<string>('');
   const [restaurants, setRestaurants] = useState<RestaurantInterface[]>([]);

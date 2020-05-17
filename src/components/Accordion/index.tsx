@@ -1,8 +1,4 @@
-import React, { useState, Children } from 'react';
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
-
-import ChevronDown from '../../assets/icons/chevron-down.svg';
-import ChevronRight from '../../assets/icons/chevron-right.svg';
+import React, { useState } from 'react';
 
 import { Container, Icon, Painel, AccordionWrapper } from './styles';
 

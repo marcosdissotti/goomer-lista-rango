@@ -14,7 +14,10 @@ interface ItemCard {
 const ItemCard: React.FC<ItemCard> = ({ name, price, image, description }) => {
   return (
     <Container>
-      <img src={image || veganRestaurantImg} />
+      <img
+        src={image || veganRestaurantImg}
+        alt="foto da refeição do cardapio"
+      />
       <Informations>
         {name && <p className="name">{name}</p>}
         {description && <p>{description}</p>}
