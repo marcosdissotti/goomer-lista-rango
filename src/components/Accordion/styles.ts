@@ -47,6 +47,12 @@ export const Icon = styled.img`
   height: 16px;
   margin-bottom: -2px;
 
+  transition: transform 0.5s;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+
   opacity: 1;
 `;
 

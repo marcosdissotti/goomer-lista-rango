@@ -40,6 +40,7 @@ const Restaurant: React.FC = () => {
   const { state } = useLocation<RestaurantLocations>();
   const [menu, setMenu] = useState<GroupMenuInterface[]>([]);
   const [modal, setModal] = useState<boolean>();
+  const [modalData, setModalData] = useState<any>();
   const [schedules, setSchedules] = useState<ScheduledTask>();
 
   useEffect(() => {
@@ -132,7 +133,13 @@ const Restaurant: React.FC = () => {
                   <div className="cards-container">
                     {group.items &&
                       group.items.map((item, index) => (
-                        <Card key={index} onClick={() => setModal(true)}>
+                        <Card
+                          key={index}
+                          onClick={() => {
+                            setModal(true);
+                            setModalData(item);
+                          }}
+                        >
                           <ItemCard
                             name={item.name}
                             price={item.price}
@@ -147,7 +154,9 @@ const Restaurant: React.FC = () => {
           </div>
           <aside></aside>
         </section>
-        {modal && <Modal />}
+        {modal && (
+          <Modal dismissModal={() => setModal(false)} modalData={modalData} />
+        )}
       </Container>
     </>
   );
