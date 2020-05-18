@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
+import media from 'styled-media-query';
 
 import { colors } from '../../styles';
 
@@ -11,6 +12,10 @@ export const Container = styled.div`
   align-items: center;
   flex-direction: column;
   background-color: ${colors.white};
+
+  ${media.lessThan('large')`
+      padding: 0 !important;
+    `}
 
   section {
     width: 100%;
@@ -50,6 +55,10 @@ export const RestaurantsWrapper = styled.div`
   width: 100%;
   padding: 26px 72px 0 72px;
 
+  ${media.lessThan('large')`
+      padding: 0 ;
+    `}
+
   .restaurants {
     width: min-content;
     margin: auto;
@@ -57,6 +66,10 @@ export const RestaurantsWrapper = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 34px 48px;
+
+    ${media.lessThan('large')`
+      grid-template-columns: 1fr;
+    `}
   }
 `;
 

@@ -11,6 +11,13 @@ export const Container = styled.div`
   padding-right: 74px;
   padding-top: 35px;
 
+  ${media.lessThan('large')`
+    padding: 0px;
+    width: 100%;
+    max-width: 100vw;
+    min-width: 0;
+  `}
+
   section {
     display: flex;
     div {
@@ -33,6 +40,10 @@ export const Container = styled.div`
       border-radius: 2px;
       margin-left: 134px;
       background: #e6e6e6 0% 0% no-repeat padding-box;
+
+      ${media.lessThan('large')`
+        display: none;
+      `}
     }
   }
 
@@ -44,6 +55,10 @@ export const Container = styled.div`
     justify-content: center;
 
     align-items: center;
+
+    ${media.lessThan('large')`
+      grid-template-columns: 1fr;
+    `}
   }
 
   .card {
@@ -144,4 +159,9 @@ export const Card = styled.button`
   width: 100%;
   height: 100%;
   border: 0px;
+
+  ${media.lessThan('large')`
+    width: 80%;
+    margin: auto;
+  `}
 `;
